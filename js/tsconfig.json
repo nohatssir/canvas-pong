@@ -1,0 +1,14 @@
+{
+    "compilerOptions": {
+        "rootDir": "src/",
+        "newLine": "lf",
+        "outDir": "dist/compiled/",
+        "target": "es5",
+        "module": "commonjs",
+        "noImplicitAny": false,
+        "sourceMap": false
+    },
+    "exclude": [
+        "node_modules"
+    ]
+}

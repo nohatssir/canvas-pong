@@ -1,0 +1,9 @@
+{
+  "scripts": {
+    "build": "tsc && browserify -e dist/compiled/app.js -o dist/app.js"
+  },
+  "devDependencies": {
+    "browserify": "^13.0.0",
+    "typescript": "^1.7.5"
+  }
+}
