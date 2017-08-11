@@ -1,37 +1,44 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
-var application_1 = require('./application');
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+var application_1 = require("./application");
 document.addEventListener("DOMContentLoaded", function (event) {
     var app = new application_1.default();
     app.run();
 });
 
 },{"./application":2}],2:[function(require,module,exports){
-var game_1 = require('./game/game');
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+var game_1 = require("./game/game");
 var Application = (function () {
     function Application() {
+        var backgroundCanvas = document.getElementById('game-background');
         var canvas = document.getElementById('game');
-        this.game = new game_1.default(canvas);
+        this.game = new game_1.default(backgroundCanvas, canvas);
     }
     Application.prototype.run = function () {
         this.game.start();
     };
     return Application;
-})();
-Object.defineProperty(exports, "__esModule", { value: true });
+}());
 exports.default = Application;
 
-},{"./game/game":23}],3:[function(require,module,exports){
+},{"./game/game":24}],3:[function(require,module,exports){
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 var AppearanceComponent = (function () {
     function AppearanceComponent() {
         this.name = 'appearance';
         this.color = 'rgba(255, 255, 255, 1.0)';
     }
     return AppearanceComponent;
-})();
-Object.defineProperty(exports, "__esModule", { value: true });
+}());
 exports.default = AppearanceComponent;
 
 },{}],4:[function(require,module,exports){
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 var CollisionComponent = (function () {
     function CollisionComponent() {
         this.name = 'collision';
@@ -39,21 +46,23 @@ var CollisionComponent = (function () {
     CollisionComponent.prototype.onCollision = function (entity1, entity2) { };
     ;
     return CollisionComponent;
-})();
-Object.defineProperty(exports, "__esModule", { value: true });
+}());
 exports.default = CollisionComponent;
 
 },{}],5:[function(require,module,exports){
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 var ControlComponent = (function () {
     function ControlComponent() {
         this.name = 'control';
     }
     return ControlComponent;
-})();
-Object.defineProperty(exports, "__esModule", { value: true });
+}());
 exports.default = ControlComponent;
 
 },{}],6:[function(require,module,exports){
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 var GoalComponent = (function () {
     function GoalComponent(scoreDisplay) {
         this.scoreDisplay = scoreDisplay;
@@ -61,11 +70,12 @@ var GoalComponent = (function () {
         this.scoreDisplay = scoreDisplay;
     }
     return GoalComponent;
-})();
-Object.defineProperty(exports, "__esModule", { value: true });
+}());
 exports.default = GoalComponent;
 
 },{}],7:[function(require,module,exports){
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 var PhysicsComponent = (function () {
     function PhysicsComponent(height, width) {
         this.height = height;
@@ -76,11 +86,12 @@ var PhysicsComponent = (function () {
         this.width = width;
     }
     return PhysicsComponent;
-})();
-Object.defineProperty(exports, "__esModule", { value: true });
+}());
 exports.default = PhysicsComponent;
 
 },{}],8:[function(require,module,exports){
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 var PositionComponent = (function () {
     function PositionComponent(x, y) {
         this.x = x;
@@ -90,11 +101,12 @@ var PositionComponent = (function () {
         this.y = y;
     }
     return PositionComponent;
-})();
-Object.defineProperty(exports, "__esModule", { value: true });
+}());
 exports.default = PositionComponent;
 
 },{}],9:[function(require,module,exports){
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 var TextComponent = (function () {
     function TextComponent(text) {
         this.text = text;
@@ -105,11 +117,12 @@ var TextComponent = (function () {
         this.text = text;
     }
     return TextComponent;
-})();
-Object.defineProperty(exports, "__esModule", { value: true });
+}());
 exports.default = TextComponent;
 
 },{}],10:[function(require,module,exports){
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 var VelocityComponent = (function () {
     function VelocityComponent() {
         this.name = 'velocity';
@@ -117,11 +130,12 @@ var VelocityComponent = (function () {
         this.y = 0.0;
     }
     return VelocityComponent;
-})();
-Object.defineProperty(exports, "__esModule", { value: true });
+}());
 exports.default = VelocityComponent;
 
 },{}],11:[function(require,module,exports){
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 var Entity = (function () {
     function Entity(id) {
         this.id = id;
@@ -131,11 +145,12 @@ var Entity = (function () {
         this.components[component.name] = component;
     };
     return Entity;
-})();
-Object.defineProperty(exports, "__esModule", { value: true });
+}());
 exports.default = Entity;
 
 },{}],12:[function(require,module,exports){
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 var CollisionSystem = (function () {
     function CollisionSystem() {
     }
@@ -187,11 +202,12 @@ var CollisionSystem = (function () {
             && object1.components.position.y + object1.components.physics.height > object2.components.position.y;
     };
     return CollisionSystem;
-})();
-Object.defineProperty(exports, "__esModule", { value: true });
+}());
 exports.default = CollisionSystem;
 
 },{}],13:[function(require,module,exports){
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 var InputSystem = (function () {
     function InputSystem(keyHandler) {
         this.keyHandler = keyHandler;
@@ -216,11 +232,12 @@ var InputSystem = (function () {
         }
     };
     return InputSystem;
-})();
-Object.defineProperty(exports, "__esModule", { value: true });
+}());
 exports.default = InputSystem;
 
 },{}],14:[function(require,module,exports){
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 var MovementSystem = (function () {
     function MovementSystem() {
     }
@@ -238,14 +255,17 @@ var MovementSystem = (function () {
         }
     };
     return MovementSystem;
-})();
-Object.defineProperty(exports, "__esModule", { value: true });
+}());
 exports.default = MovementSystem;
 
 },{}],15:[function(require,module,exports){
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 var RenderSystem = (function () {
-    function RenderSystem(canvas) {
+    function RenderSystem(backgroundCanvas, canvas) {
+        this.backgroundCanvas = backgroundCanvas;
         this.canvas = canvas;
+        this.backgroundCanvas = backgroundCanvas;
         this.canvas = canvas;
     }
     RenderSystem.prototype.update = function (entities, delta, info) {
@@ -266,31 +286,35 @@ var RenderSystem = (function () {
         }
     };
     RenderSystem.prototype.renderBox = function (entity, scale) {
-        var positionX = entity.components.position.x * scale;
-        var positionY = entity.components.position.y * scale;
-        var height = entity.components.physics.height * scale;
-        var width = entity.components.physics.width * scale;
+        var positionX = Math.round(entity.components.position.x * scale);
+        var positionY = Math.round(entity.components.position.y * scale);
+        var height = Math.round(entity.components.physics.height * scale);
+        var width = Math.round(entity.components.physics.width * scale);
         this.canvas.getContext().fillStyle = entity.components.appearance.color;
         this.canvas.getContext().fillRect(positionX, positionY, width, height);
     };
     RenderSystem.prototype.renderText = function (entity, scale) {
-        var positionX = entity.components.position.x * scale;
-        var positionY = entity.components.position.y * scale;
+        var positionX = Math.round(entity.components.position.x * scale);
+        var positionY = Math.round(entity.components.position.y * scale);
         var font = entity.components.text.font;
-        var size = entity.components.text.size;
+        var fontSize = Math.round(entity.components.text.size * scale);
         var text = entity.components.text.text;
         var textAlign = entity.components.text.textAlign;
-        this.canvas.getContext().fillStyle = entity.components.appearance.color;
-        this.canvas.getContext().font = (size * scale) + "pt " + font;
-        this.canvas.getContext().textAlign = textAlign;
-        this.canvas.getContext().fillText(text, positionX, positionY);
+        var contextFont = fontSize + "px \"" + font + "\"";
+        var context = this.canvas.getContext();
+        context.fillStyle = entity.components.appearance.color;
+        ;
+        context.font = contextFont;
+        context.textAlign = textAlign;
+        context.fillText(text, positionX, positionY);
     };
     return RenderSystem;
-})();
-Object.defineProperty(exports, "__esModule", { value: true });
+}());
 exports.default = RenderSystem;
 
 },{}],16:[function(require,module,exports){
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 var default_1 = (function () {
     function default_1() {
         this.entities = {};
@@ -309,17 +333,55 @@ var default_1 = (function () {
         }
     };
     return default_1;
-})();
-Object.defineProperty(exports, "__esModule", { value: true });
+}());
 exports.default = default_1;
 
 },{}],17:[function(require,module,exports){
+"use strict";
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+Object.defineProperty(exports, "__esModule", { value: true });
+var canvas_1 = require("./canvas");
+var BackgroundCanvas = (function (_super) {
+    __extends(BackgroundCanvas, _super);
+    function BackgroundCanvas(canvas, backgroundColor) {
+        var _this = _super.call(this, canvas) || this;
+        // We need to call resize again since we can't set the correct
+        // background color until after we've called super.
+        _this.backgroundColor = backgroundColor;
+        _this.resize();
+        return _this;
+    }
+    BackgroundCanvas.prototype.reset = function () {
+        this.getContext().clearRect(0, 0, this.getWidth(), this.getHeight());
+        this.getContext().fillStyle = this.backgroundColor;
+        this.getContext().fillRect(0, 0, this.getWidth(), this.getHeight());
+    };
+    BackgroundCanvas.prototype.resize = function () {
+        _super.prototype.resize.call(this);
+        this.reset();
+    };
+    return BackgroundCanvas;
+}(canvas_1.default));
+exports.default = BackgroundCanvas;
+;
+
+},{"./canvas":18}],18:[function(require,module,exports){
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 var Canvas = (function () {
     function Canvas(canvas) {
         this.canvas = canvas;
         this.context = this.canvas.getContext("2d");
         this.resize();
-        this.context.fillStyle = "rgb(255, 255, 255)";
         window.addEventListener("resize", this.resize.bind(this));
     }
     Canvas.prototype.getCanvas = function () {
@@ -334,25 +396,8 @@ var Canvas = (function () {
     Canvas.prototype.getWidth = function () {
         return this.canvas.width;
     };
-    Canvas.prototype.setBackgroundColor = function (color) {
-        this.context.fillStyle = color;
-        this.context.fillRect(0, 0, this.canvas.width, this.canvas.height);
-        this.context.fillStyle = "rgb(255, 255, 255)";
-    };
-    Canvas.prototype.defaults = function () {
-        this.setBackgroundColor("rgb(53, 53, 53)");
-        this.context.fillStyle = "rgb(255, 255, 255)";
-    };
     Canvas.prototype.reset = function () {
-        // Store the current transformation matrix.
-        this.context.save();
-        // Use the identity matrix while clearing the canvas.
-        this.context.setTransform(1, 0, 0, 1, 0, 0);
         this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
-        // Restore the transform.
-        this.context.restore();
-        // Set defaults.
-        this.defaults();
     };
     Canvas.prototype.resize = function () {
         var width = window.innerWidth;
@@ -367,18 +412,19 @@ var Canvas = (function () {
         this.canvas.height = newHeight;
     };
     return Canvas;
-})();
-Object.defineProperty(exports, "__esModule", { value: true });
+}());
 exports.default = Canvas;
 ;
 
-},{}],18:[function(require,module,exports){
-var entity_1 = require('../../ecs/entity');
-var appearance_1 = require('../../ecs/components/appearance');
-var collision_1 = require('../../ecs/components/collision');
-var physics_1 = require('../../ecs/components/physics');
-var position_1 = require('../../ecs/components/position');
-var velocity_1 = require('../../ecs/components/velocity');
+},{}],19:[function(require,module,exports){
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+var entity_1 = require("../../ecs/entity");
+var appearance_1 = require("../../ecs/components/appearance");
+var collision_1 = require("../../ecs/components/collision");
+var physics_1 = require("../../ecs/components/physics");
+var position_1 = require("../../ecs/components/position");
+var velocity_1 = require("../../ecs/components/velocity");
 var BallFactory = (function () {
     function BallFactory() {
     }
@@ -419,16 +465,17 @@ var BallFactory = (function () {
         }
     };
     return BallFactory;
-})();
-Object.defineProperty(exports, "__esModule", { value: true });
+}());
 exports.default = BallFactory;
 
-},{"../../ecs/components/appearance":3,"../../ecs/components/collision":4,"../../ecs/components/physics":7,"../../ecs/components/position":8,"../../ecs/components/velocity":10,"../../ecs/entity":11}],19:[function(require,module,exports){
-var entity_1 = require('../../ecs/entity');
-var collision_1 = require('../../ecs/components/collision');
-var goal_1 = require('../../ecs/components/goal');
-var physics_1 = require('../../ecs/components/physics');
-var position_1 = require('../../ecs/components/position');
+},{"../../ecs/components/appearance":3,"../../ecs/components/collision":4,"../../ecs/components/physics":7,"../../ecs/components/position":8,"../../ecs/components/velocity":10,"../../ecs/entity":11}],20:[function(require,module,exports){
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+var entity_1 = require("../../ecs/entity");
+var collision_1 = require("../../ecs/components/collision");
+var goal_1 = require("../../ecs/components/goal");
+var physics_1 = require("../../ecs/components/physics");
+var position_1 = require("../../ecs/components/position");
 var GoalFactory = (function () {
     function GoalFactory() {
     }
@@ -441,15 +488,16 @@ var GoalFactory = (function () {
         return line;
     };
     return GoalFactory;
-})();
-Object.defineProperty(exports, "__esModule", { value: true });
+}());
 exports.default = GoalFactory;
 
-},{"../../ecs/components/collision":4,"../../ecs/components/goal":6,"../../ecs/components/physics":7,"../../ecs/components/position":8,"../../ecs/entity":11}],20:[function(require,module,exports){
-var entity_1 = require('../../ecs/entity');
-var appearance_1 = require('../../ecs/components/appearance');
-var physics_1 = require('../../ecs/components/physics');
-var position_1 = require('../../ecs/components/position');
+},{"../../ecs/components/collision":4,"../../ecs/components/goal":6,"../../ecs/components/physics":7,"../../ecs/components/position":8,"../../ecs/entity":11}],21:[function(require,module,exports){
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+var entity_1 = require("../../ecs/entity");
+var appearance_1 = require("../../ecs/components/appearance");
+var physics_1 = require("../../ecs/components/physics");
+var position_1 = require("../../ecs/components/position");
 var LineFactory = (function () {
     function LineFactory() {
     }
@@ -461,18 +509,19 @@ var LineFactory = (function () {
         return line;
     };
     return LineFactory;
-})();
-Object.defineProperty(exports, "__esModule", { value: true });
+}());
 exports.default = LineFactory;
 
-},{"../../ecs/components/appearance":3,"../../ecs/components/physics":7,"../../ecs/components/position":8,"../../ecs/entity":11}],21:[function(require,module,exports){
-var entity_1 = require('../../ecs/entity');
-var appearance_1 = require('../../ecs/components/appearance');
-var collision_1 = require('../../ecs/components/collision');
-var control_1 = require('../../ecs/components/control');
-var physics_1 = require('../../ecs/components/physics');
-var position_1 = require('../../ecs/components/position');
-var velocity_1 = require('../../ecs/components/velocity');
+},{"../../ecs/components/appearance":3,"../../ecs/components/physics":7,"../../ecs/components/position":8,"../../ecs/entity":11}],22:[function(require,module,exports){
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+var entity_1 = require("../../ecs/entity");
+var appearance_1 = require("../../ecs/components/appearance");
+var collision_1 = require("../../ecs/components/collision");
+var control_1 = require("../../ecs/components/control");
+var physics_1 = require("../../ecs/components/physics");
+var position_1 = require("../../ecs/components/position");
+var velocity_1 = require("../../ecs/components/velocity");
 var PaddleFactory = (function () {
     function PaddleFactory() {
     }
@@ -490,15 +539,16 @@ var PaddleFactory = (function () {
         return paddle;
     };
     return PaddleFactory;
-})();
-Object.defineProperty(exports, "__esModule", { value: true });
+}());
 exports.default = PaddleFactory;
 
-},{"../../ecs/components/appearance":3,"../../ecs/components/collision":4,"../../ecs/components/control":5,"../../ecs/components/physics":7,"../../ecs/components/position":8,"../../ecs/components/velocity":10,"../../ecs/entity":11}],22:[function(require,module,exports){
-var entity_1 = require('../../ecs/entity');
-var appearance_1 = require('../../ecs/components/appearance');
-var position_1 = require('../../ecs/components/position');
-var text_1 = require('../../ecs/components/text');
+},{"../../ecs/components/appearance":3,"../../ecs/components/collision":4,"../../ecs/components/control":5,"../../ecs/components/physics":7,"../../ecs/components/position":8,"../../ecs/components/velocity":10,"../../ecs/entity":11}],23:[function(require,module,exports){
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+var entity_1 = require("../../ecs/entity");
+var appearance_1 = require("../../ecs/components/appearance");
+var position_1 = require("../../ecs/components/position");
+var text_1 = require("../../ecs/components/text");
 var ScoreFactory = (function () {
     function ScoreFactory() {
     }
@@ -510,28 +560,31 @@ var ScoreFactory = (function () {
         return score;
     };
     return ScoreFactory;
-})();
-Object.defineProperty(exports, "__esModule", { value: true });
+}());
 exports.default = ScoreFactory;
 
-},{"../../ecs/components/appearance":3,"../../ecs/components/position":8,"../../ecs/components/text":9,"../../ecs/entity":11}],23:[function(require,module,exports){
-var canvas_1 = require('./canvas');
-var world_1 = require('../ecs/world');
-var key_handler_1 = require('../input/key-handler');
-var ball_1 = require('./entity-factories/ball');
-var goal_1 = require('./entity-factories/goal');
-var line_1 = require('./entity-factories/line');
-var paddle_1 = require('./entity-factories/paddle');
-var score_1 = require('./entity-factories/score');
-var collision_1 = require('../ecs/systems/collision');
-var input_1 = require('../ecs/systems/input');
-var movement_1 = require('../ecs/systems/movement');
-var render_1 = require('../ecs/systems/render');
+},{"../../ecs/components/appearance":3,"../../ecs/components/position":8,"../../ecs/components/text":9,"../../ecs/entity":11}],24:[function(require,module,exports){
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+var background_canvas_1 = require("./background-canvas");
+var canvas_1 = require("./canvas");
+var world_1 = require("../ecs/world");
+var key_handler_1 = require("../input/key-handler");
+var ball_1 = require("./entity-factories/ball");
+var goal_1 = require("./entity-factories/goal");
+var line_1 = require("./entity-factories/line");
+var paddle_1 = require("./entity-factories/paddle");
+var score_1 = require("./entity-factories/score");
+var collision_1 = require("../ecs/systems/collision");
+var input_1 = require("../ecs/systems/input");
+var movement_1 = require("../ecs/systems/movement");
+var render_1 = require("../ecs/systems/render");
 var Game = (function () {
-    function Game(canvas) {
+    function Game(backgroundCanvas, canvas) {
         this.startTime = null;
         this.height = 300;
         this.width = 600;
+        this.backgroundCanvas = new background_canvas_1.default(backgroundCanvas, "rgb(53, 53, 53)");
         this.canvas = new canvas_1.default(canvas);
         this.world = new world_1.default();
     }
@@ -540,7 +593,7 @@ var Game = (function () {
         this.world.addSystem(new input_1.default(new key_handler_1.default()));
         this.world.addSystem(new movement_1.default());
         this.world.addSystem(new collision_1.default());
-        this.world.addSystem(new render_1.default(this.canvas));
+        this.world.addSystem(new render_1.default(this.backgroundCanvas, this.canvas));
         window.requestAnimationFrame(this.tick.bind(this));
     };
     Game.prototype.tick = function (time) {
@@ -583,11 +636,12 @@ var Game = (function () {
         this.world.addEntity(goalTwo);
     };
     return Game;
-})();
-Object.defineProperty(exports, "__esModule", { value: true });
+}());
 exports.default = Game;
 
-},{"../ecs/systems/collision":12,"../ecs/systems/input":13,"../ecs/systems/movement":14,"../ecs/systems/render":15,"../ecs/world":16,"../input/key-handler":24,"./canvas":17,"./entity-factories/ball":18,"./entity-factories/goal":19,"./entity-factories/line":20,"./entity-factories/paddle":21,"./entity-factories/score":22}],24:[function(require,module,exports){
+},{"../ecs/systems/collision":12,"../ecs/systems/input":13,"../ecs/systems/movement":14,"../ecs/systems/render":15,"../ecs/world":16,"../input/key-handler":25,"./background-canvas":17,"./canvas":18,"./entity-factories/ball":19,"./entity-factories/goal":20,"./entity-factories/line":21,"./entity-factories/paddle":22,"./entity-factories/score":23}],25:[function(require,module,exports){
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 var KeyHandler = (function () {
     function KeyHandler() {
         this.pressedKeys = new Array();
@@ -604,8 +658,7 @@ var KeyHandler = (function () {
         this.pressedKeys[e.keyCode] = false;
     };
     return KeyHandler;
-})();
-Object.defineProperty(exports, "__esModule", { value: true });
+}());
 exports.default = KeyHandler;
 
 },{}]},{},[1]);
