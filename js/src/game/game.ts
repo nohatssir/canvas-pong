@@ -1,3 +1,4 @@
+import BackgroundCanvas from './background-canvas';
 import Canvas from './canvas';
 import Entity from '../ecs/entity';
 import World from '../ecs/world';
@@ -17,6 +18,7 @@ import MovementSystem from '../ecs/systems/movement';
 import RenderSystem from '../ecs/systems/render';
 
 export default class Game {
+    private backgroundCanvas: Canvas;
     private canvas: Canvas;
     private world: World;
 
@@ -24,7 +26,8 @@ export default class Game {
     private height: number = 300;
     private width: number = 600;
 
-    constructor(canvas: HTMLCanvasElement) {
+    constructor(backgroundCanvas: HTMLCanvasElement, canvas: HTMLCanvasElement) {
+        this.backgroundCanvas = new BackgroundCanvas(backgroundCanvas, "rgb(53, 53, 53)");
         this.canvas = new Canvas(canvas);
         this.world = new World();
     }
@@ -35,7 +38,7 @@ export default class Game {
         this.world.addSystem(new InputSystem(new KeyHandler()));
         this.world.addSystem(new MovementSystem());
         this.world.addSystem(new CollisionSystem());
-        this.world.addSystem(new RenderSystem(this.canvas));
+        this.world.addSystem(new RenderSystem(this.backgroundCanvas, this.canvas));
 
         window.requestAnimationFrame(this.tick.bind(this));
     }

@@ -2,7 +2,8 @@ import { ISystem } from './system';
 import Canvas from '../../game/canvas';
 
 export default class RenderSystem implements ISystem {
-    constructor(public canvas: Canvas) {
+    constructor(public backgroundCanvas: Canvas, public canvas: Canvas) {
+        this.backgroundCanvas = backgroundCanvas;
         this.canvas = canvas;
     }
 
@@ -29,26 +30,31 @@ export default class RenderSystem implements ISystem {
     }
 
     private renderBox(entity, scale: number): void {
-        let positionX = entity.components.position.x * scale;
-        let positionY = entity.components.position.y * scale;
-        let height = entity.components.physics.height * scale;
-        let width = entity.components.physics.width * scale;
+        let positionX = Math.round(entity.components.position.x * scale);
+        let positionY = Math.round(entity.components.position.y * scale);
+        let height = Math.round(entity.components.physics.height * scale);
+        let width = Math.round(entity.components.physics.width * scale);
 
         this.canvas.getContext().fillStyle = entity.components.appearance.color;
         this.canvas.getContext().fillRect(positionX, positionY, width, height);
     }
 
     private renderText(entity, scale: number): void {
-        let positionX = entity.components.position.x * scale;
-        let positionY = entity.components.position.y * scale;
+        let positionX = Math.round(entity.components.position.x * scale);
+        let positionY = Math.round(entity.components.position.y * scale);
+
         let font = entity.components.text.font;
-        let size = entity.components.text.size;
+        let fontSize = Math.round(entity.components.text.size * scale);
         let text = entity.components.text.text;
         let textAlign = entity.components.text.textAlign;
+        let contextFont = fontSize + "px \"" + font + "\"";
 
-        this.canvas.getContext().fillStyle = entity.components.appearance.color;
-        this.canvas.getContext().font = (size * scale) + "pt " + font;
-        this.canvas.getContext().textAlign = textAlign;
-        this.canvas.getContext().fillText(text, positionX, positionY);
+        let context = this.canvas.getContext();
+
+        context.fillStyle = entity.components.appearance.color;;
+        context.font = contextFont;
+        context.textAlign = textAlign;
+
+        context.fillText(text, positionX, positionY);
     }
 }

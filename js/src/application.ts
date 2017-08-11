@@ -8,9 +8,10 @@ export default class Application implements IApplication {
     private game: Game;
 
     constructor() {
+        let backgroundCanvas = <HTMLCanvasElement>document.getElementById('game-background');
         let canvas = <HTMLCanvasElement>document.getElementById('game');
 
-        this.game = new Game(canvas);
+        this.game = new Game(backgroundCanvas, canvas);
     }
 
     run(): void {

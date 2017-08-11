@@ -4,6 +4,7 @@ body {
     justify-content: center;
 }
 
-#game {
-    background: rgb(53, 53, 53);
+.game-layer {
+    left: 0;
+    position: absolute;
 }

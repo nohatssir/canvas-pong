@@ -7,9 +7,12 @@
         <link rel="stylesheet" href="css/main.css" type="text/css" />
     </head>
     <body>
-        <canvas id="game">
-            Your browser does not support HTML5 Canvas. Please switch to another browser.
-        </canvas>
+        <div>
+            <canvas class="game-layer" id="game-background" style="z-index: 0"></canvas>
+            <canvas class="game-layer" id="game" style="z-index: 1">
+                Your browser does not support HTML5 Canvas. Please switch to another browser.
+            </canvas>
+        </div>
         <script type="text/javascript" src="js/dist/app.js"></script>
     </body>
 </html>
