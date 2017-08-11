@@ -3,7 +3,7 @@
     "build": "tsc && browserify -e dist/compiled/app.js -o dist/app.js"
   },
   "devDependencies": {
-    "browserify": "^13.0.0",
-    "typescript": "^1.7.5"
+    "browserify": "^14.4.0",
+    "typescript": "^2.4.2"
   }
 }
